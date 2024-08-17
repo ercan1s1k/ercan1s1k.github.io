@@ -38,7 +38,8 @@ body {
 	height: 50px;
 	margin-top:5px;
 	padding:10px 6px 10px 8px;
-	overflow:auto;;
+	overflow-x:hidden;
+	overflow-y:scroll;
 }
 
 .sayfanin_yan_kismi {
