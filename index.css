@@ -37,8 +37,9 @@ body {
 	height: 50px;
 	margin-top:5px;
 	padding:10px 6px 10px 8px;
-	overflow-x:hidden;
-	overflow-y:scroll;
+	max-height: 100%; /* Yüksekliği konteynerin yüksekliği ile sınırlar */
+ 	overflow-y: auto; /* Dikey kaydırma çubuğu ekler */
+  	overflow-x: hidden; /* Yatay taşmaları gizler */
 }
 
 .sayfanin_yan_kismi {
