@@ -40,6 +40,7 @@ body {
   	overflow-y: auto; /* Dikey kaydırma çubuğu ekler */
   	overflow-x: hidden; /* Yatay taşmaları gizler */
 	margin-bottom:15px;
+	padding: 10px 5px 10px 7px;
 }
 
 .sayfanin_yan_kismi {
