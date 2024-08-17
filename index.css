@@ -37,8 +37,7 @@ body {
 	max-height:200px;
   	overflow-y: auto; /* Dikey kaydırma çubuğu ekler */
   	overflow-x: hidden; /* Yatay taşmaları gizler */
-  	display: grid; /* Grid düzeni */
-  	grid-template-rows: auto 1fr; /* Esnek satır düzeni */
+	margin-bottom:15px;
 }
 
 .sayfanin_yan_kismi {
