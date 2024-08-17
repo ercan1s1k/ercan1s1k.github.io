@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.sayfanin_tum_icerigi {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1.3fr 6fr 1.3fr; /* Sağ ve sol kısımlar %35 daraltıldı */
+    grid-template-rows: 1fr 7fr 0.5fr; /* Üst ve alt kısımlar %50 kısaltıldı */
+}
+.sayfanin_baslik_kismi {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 3;
+    background-color: green;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+.sayfanin_navigasyon_kismi {
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+    background-color: blue;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+.sayfanin_genel_icerigi {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+    background-color: purple;
+    padding: 20px;
+    overflow-y: auto;
+}
+.sayfanin_alt_icerigi{
+	background-color: gray;
+	width:100%;
+	height: 50px;
+	margin-top:5px;
+	
+}
+
+.sayfanin_yan_kismi {
+    grid-row: 2 / span 1;
+    grid-column: 3 / span 1;
+    background-color: yellow;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+.sayfanin_en_alt_kismi {
+    grid-row: 3 / span 1;
+    grid-column: 1 / span 3;
+    background-color: pink;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+}
