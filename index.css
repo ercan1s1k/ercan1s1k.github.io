@@ -37,7 +37,7 @@ body {
 	max-height:200px;
   	overflow-y: auto; /* Dikey kaydırma çubuğu ekler */
   	overflow-x: hidden; /* Yatay taşmaları gizler */
-	margin-bottom:15px;
+	margin-bottom:15%;;
 }
 
 .sayfanin_yan_kismi {
