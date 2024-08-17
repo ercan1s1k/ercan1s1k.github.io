@@ -30,7 +30,6 @@ body {
     grid-column: 2 / span 1;
     background-color: purple;
     padding: 20px;
-    overflow-y: auto;
 }
 .sayfanin_alt_icerigi{
 	background-color: gray;
@@ -38,7 +37,6 @@ body {
 	height: 50px;
 	margin-top:5px;
 	padding:10px 6px 10px 8px;
-	overflow-y:hidden;
 }
 
 .sayfanin_yan_kismi {
