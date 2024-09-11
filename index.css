@@ -1,59 +1,1596 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-.sayfanin_tum_icerigi {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1.3fr 6fr 1.3fr; /* Sağ ve sol kısımlar %35 daraltıldı */
-    grid-template-rows: 1fr 7fr 0.5fr; /* Üst ve alt kısımlar %50 kısaltıldı */
-}
-.sayfanin_baslik_kismi {
-    grid-row: 1 / span 1;
-    grid-column: 1 / span 3;
-    background-color: green;
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-}
-.sayfanin_navigasyon_kismi {
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
-    background-color: blue;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-}
-.sayfanin_genel_icerigi {
-    grid-row: 2 / span 1;
-    grid-column: 2 / span 1;
-    background-color: purple;
-}
-.sayfanin_alt_icerigi{
-	background-color: gray;
-	width:100%;
-	height:150px;
-  	overflow-y: auto; /* Dikey kaydırma çubuğu ekler */
-  	overflow-x: hidden; /* Yatay taşmaları gizler */
-	margin-bottom:15px;
-	padding: 10px;
+*{
+	box-sizing: border-box; /* Her şey border'a sığsın. */
 }
 
-.sayfanin_yan_kismi {
-    grid-row: 2 / span 1;
-    grid-column: 3 / span 1;
-    background-color: yellow;
-    padding: 20px;
-    position: sticky;
-    top: 0;
+/* body başlangıcı */
+.body {
+	background-color: darkblue;           /* Sayfanın arka plan rengi */
+    margin: 0;                                    /* Tarayısıcının kenarlarından uzaklık */
+    font-family: Arial, sans-serif;          /* Sayfanın yazı tipi*/
+	display: grid;                                /* Sayfa, grid ile tasarlama */
+	grid-template-columns: 9fr 2fr;        /* Grid tasarımında birinci sütun genişliği 8fr, ikinci sütunun genişliği ise 2fr */
+	grid-template-rows: 2fr 17fr 1fr;      /* Grid tasarımında birinci satır yüksekliği, 2fr(2/20=%10), ikinci satır yüksekliği 17fr(17/20=%85), üçüncü satır yüksekliği 1fr(1/20=%5) */
 }
-.sayfanin_en_alt_kismi {
-    grid-row: 3 / span 1;
-    grid-column: 1 / span 3;
-    background-color: pink;
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    bottom: 0;
+/* body sonu */
+
+/* header başlangıcı */
+.header {
+    grid-row: 1 / span 1;                      /* İlk satırdan başlayarak bir satırdan ibaret olsun. */
+    grid-column: 1 / span 3;                 /* İlk sütundan başlayarak üç sütunu birleştir. */
+    background-color: darkblue; /* Header'in arka plan rengi */
+    text-align: center;               /* Yazı hizalaması*/
+    position: sticky;                  /* Konumlandırması yapışkan */
+    top: 0;                               /* Yukarıya yapıştırma */
+	z-index: 2;                         /* Derinlik ekseni olarak önde */
+	height: auto;                       /* Yükseklik otomatik */
 }
+
+/*  animasyonlu logo başlangıcı */
+.container { /* Logonun kapsayıcısına ulaşma */
+    display: flex;  /* Kapsayıcıdaki öğeler esnek bir bir yapıda */
+    place-items: center;  /* Hizalaması ortada */
+    width: 100%; /* Genişlik */
+    height: 100%; /* Yükseklik */
+    position: relative; /* Göreceli konumlandırma */
+    z-index: 5;           /* Derinlik ekseninde önde */
+}
+.ball {                     /* Animasyon dairesi olan ball elementine ulaşılsın.*/
+    width: 8.6vw;        /* Animasyon dairesin genişliği */
+    height: 8.6vw;       /* Animasyon dairesin yüksekliği */
+    border-radius: 50%; /* Kareyi daireleştirme */
+    position: absolute;  /* Mutlak konumlandırma. */
+    display: flex;          /* Dairedeki elementler, esnek yapıda*/
+    justify-content: center; /* Yatay hizalamada ortada */
+    align-items: center;   /* Dikey hizalamada ortada */
+    z-index: 6; /* Derinlik ekseninde önde */
+	top:0;        /* Daire, yukarıda */
+	left:0;        /* ama solda olsun. */
+	animation: top 2.5s linear infinite reverse; /* Daire renk bir akışı 2.5 saniyede olcak şekilde sabit hızda sürekli tersten yani içten dışa aksın. */
+}
+.text {
+    position: absolute; /* Mutlak konumlansın. */
+    width: 100%; /* Genişliği %100 olsun. */
+    height: 100%; /* Yüksekliği %100 olsun. */
+    display: flex; /* Esnek bir yapıda olsun. */
+    justify-content: center; /* Yatayda ortada olsun. */
+    align-items: center; /* Dkeyde ortada olsun. */
+    font-size: 1.7vw; /* Yazı boyutu kullanıcının ekran genişliğinin %1.7'si olsun. */
+    font-weight: bold; /* Yazı kalınlığı kalın olsun. */
+    animation: yazi 5s linear infinite; /* Yazı bir dönüşü 5 saniyede olacak şekilde sabit hızda sürekli saat yönünde dönsün */
+    z-index: 7; /* Derinlik ekseninde yazı önde görünsün */
+	letter-spacing: -40px; /* Yazının harfler arası uzaklığı, -6px olsun. */
+	top: 0; /* Yukarıda olsun */
+	left: 0; /*Solda olsun. */
+}
+.ball:hover{ /* Fareyle dairenin üzerine gelindiğinde şu olaylar gerçekleşsin: */
+	animation: top .01s linear infinite, yazi 2.5s linear infinite reverse; /* Fareyle daire ve yazıdan teşkil logonun üzerine gelindiğinde logo anmasyonu*/
+}
+
+.text span { /* Yazıdaki harflere erişilsin */
+    position: absolute; /* Mutlak konumlandırma */
+    transform-origin: center; /* Harflerin dönüş merkezi */
+}
+
+.e{color:magenta;} /* e hafinin rengi eflatun */
+.r{color:magenta;} /* r hafinin rengi eflatun */
+.c{color:magenta;} /* c hafinin rengi eflatun */
+.a{color:magenta;} /* a hafinin rengi eflatun */
+.n{color:magenta;} /* n hafinin rengi eflatun */
+.i{color:red;}         /* I harfinin rengi kırmızı */
+.s{color:red;}         /* ş harfinin rengi kırmızı */
+.i{color:red;}         /* ı harfinin rengi kırmızı */
+.k{color:red;}         /* k harfinin rengi kırmızı */
+
+.text span:nth-child(1){ transform: rotate(0deg) translate(3vw); } /* Harfleri daire içerisine dağıtma */
+.text span:nth-child(2){ transform: rotate(20deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(3){ transform: rotate(40deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(4){ transform: rotate(60deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(5){ transform: rotate(80deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(6){ transform: rotate(100deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(7){ transform: rotate(120deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(8){ transform: rotate(140deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(9){ transform: rotate(160deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(10){ transform: rotate(180deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(11){ transform: rotate(200deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(12){ transform: rotate(220deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(13){ transform: rotate(240deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(14){ transform: rotate(260deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(15){ transform: rotate(280deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(16){ transform: rotate(300deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(17){ transform: rotate(320deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+.text span:nth-child(18){ transform: rotate(340deg) translate(3vw); }/* Harfleri daire içerisine dağıtma */
+
+@keyframes yazi { /* Yazı için animasyon oluşturuluyor. */
+    from { transform: rotate(0deg); } /* Yazıyı 0. dereceden */
+    to { transform: rotate(360deg); } /* 360. dereceye kadar döndürme */
+}
+
+/* Dairedeki renk akış animasyonu başlangıcı*/
+@keyframes top {
+    0% {
+        background: radial-gradient(circle, rgba(0,0,255,0.1)10%, rgba(0,255,255,0.2)20%, rgba(64,224,208,0.3)30%, rgba(0,255,0,0.4)40%, rgba(125,125,125,0.5)50%, rgba(255,255,0,0.6)60%, rgba(120,80,255,0.7)70%, rgba(255,0,255,0.8)80%, rgba(100,20,100,0.9)90%, rgba(120,50,30,1)100%) ; 
+    }	
+    10% {
+        background: radial-gradient(circle, rgba(0,255,255,0.2)10%, rgba(64,224,208,0.3)20%, rgba(0,255,0,0.4)30%, rgba(125,125,125,0.5)40%, rgba(255,255,0,0.6)50%, rgba(120,80,255,0.7)60%, rgba(255,0,255,0.8)70%, rgba(100,20,100,0.9)80%, rgba(120,50,30,1)90%, rgba(0,0,255,0.1)100%) ;
+    }	
+    20% {
+        background: radial-gradient(circle, rgba(64,224,208,0.3)10%, rgba(0,255,0,0.4)20%, rgba(125,125,125,0.5)30%, rgba(255,255,0,0.6)40%, rgba(120,80,255,0.7)50%, rgba(255,0,255,0.8)60%, rgba(100,20,100,0.9)70%, rgba(120,50,30,1)80%, rgba(0,0,255,0.1)90%, rgba(64,224,208,0.2)100%) ;
+    }	
+    30% {
+        background: radial-gradient(circle, rgba(0,255,0,0.4)10%, rgba(125,125,125,0.5)20%, rgba(255,255,0,0.6)30%, rgba(120,80,255,0.7)40%, rgba(255,0,255,0.8)50%, rgba(100,20,100,0.9)60%, rgba(120,50,30,1)70%, rgba(0,0,255,0.1)80%, rgba(0,255,255,0.2)90%, rgba(64,224,208,0.3)100%) ;
+    }	
+    40% {
+        background: radial-gradient(circle, rgba(125,125,125,0.5)10%, rgba(255,255,0,0.6)20%, rgba(120,80,255,0.7)30%, rgba(40,50,90,0.8)40%, rgba(100,20,100,0.9)50%, rgba(120,50,30,1)60%, rgba(0,0,255,0.1)70%, rgba(0,255,255,0.2)80%, rgba(64,224,208,0.3)90%, rgba(0,255,0,0.4)100%) ;
+    }	
+    50% {
+        background: radial-gradient(circle, rgba(255,255,0,0.6)10%, rgba(120,80,255,0.7)20%, rgba(40,50,90,0.8)30%, rgba(100,20,100,0.9)40%, rgba(120,50,30,1)50%, rgba(0,0,255,0.1)60%, rgba(0,255,255,0.2)70%, rgba(64,224,208,0.3)80%, rgba(0,255,0,0.4)90%, rgba(125,125,125,0.5)100%) ;
+    }	
+    60% {
+        background: radial-gradient(circle, rgba(120,80,255,0.7)10%, rgba(40,50,90,0.8)20%, rgba(100,20,100,0.9)30%, rgba(120,50,30,1)40%, rgba(0,0,255,0.1)50%, rgba(0,255,255,0.2)60%, rgba(64,224,208,0.3)70%, rgba(0,255,0,0.4)80%, rgba(125,125,125,0.5)90%, rgba(255,255,0,0.6)100%) ;
+    }	
+    70% {
+        background: radial-gradient(circle, rgba(255,0,255,0.8)10%, rgba(100,20,100,0.9)20%, rgba(120,50,30,1)30%, rgba(0,0,255,0.1)40%, rgba(0,255,255,0.2)50%, rgba(64,224,208,0.3)60%, rgba(0,255,0,0.4)70%, rgba(125,125,125,0.5)80%, rgba(255,255,0,0.6)90%, rgba(120,80,255,7)100%) ;
+    }	
+    80% {
+        background: radial-gradient(circle, rgba(100,20,100,0.9)10%, rgba(120,50,30,1)20%, rgba(0,0,255,0.1)30%, rgba(0,255,255,0.2)40%, rgba(64,224,208,0.3)50%, rgba(0,255,0,0.4)60%, rgba(125,125,125,0.5)70%, rgba(255,255,0,0.6)80%, rgba(120,80,255,0.7)90%, rgba(255,0,255,8)100%) ;
+    }	
+    90% {
+        background: radial-gradient(circle, rgba(120,50,30,1)10%, rgba(0,0,255,0.1)20%, rgba(0,255,255,0.2)30%, rgba(64,224,208,0.3)40%, rgba(0,255,0,0.4)50%, rgba(125,125,125,0.5)60%, rgba(255,255,0,0.6)70%, rgba(120,80,255,0.7)80%, rgba(255,0,255,0.8)90%, rgba(100,20,100,0.9)100%) ;
+    }	
+    100% {
+        background: radial-gradient(circle, rgba(0,0,255,0.1)10%, rgba(0,255,255,0.2)20%, rgba(64,224,208,0.3)30%, rgba(0,255,0,0.4)40%, rgba(125,125,125,0.5)50%, rgba(255,255,0,0.6)60%, rgba(120,80,255,0.7)70%, rgba(255,0,255,0.8)80%, rgba(100,20,100,0.9)90%, rgba(120,50,30,1)100%) ;
+    }
+	
+}
+/* Dairedeki renk akış animasyonu sonu*/
+/*  animasyonlu logo için animations sonu */
+
+.header .h1{ /* Sayfa başlığına erişme */
+	text-align: center; /* Hizalaması ortada */
+	font-family: Verdana; /* Yazı tipi Verdana */
+	color: white; /* Rengi beyaz */
+	font-size: 3.2vw; /* Yazı boyutu */
+	margin: 0.5vw 0 0 6.5vw; /* Diğer elementlerden yukarı ve sol taraflardan uzaklık*/
+}
+
+.header .nav { /* Navigasyona erişme */
+    background-color: darkblue;  /* Navigasyonun arka plan rengi*/
+    position: sticky; /* Yapışkan konumlandırma */
+    top: 0; /* Yukarıya yapıştırma */
+	width: 98vw; /* Genişlik */
+	padding: 0; /* İç boşluk */
+}
+
+.header .nav .ul{ /* Navigasyondaki listeye erişme */
+	display: flex; /* Liste esnek yapıda */
+	flex-direction: row; /* Liste öğeleri yatay */
+	flex-wrap: nowrap; /* Liste öğeleri sığmadığı durumlarda, alta veya üste çıkmasın. */
+	padding: 0; /* İç boşluk */
+	justify-content: space-around; /* Sağa sola boşuk vererek sıralama */
+	list-style-type: none; /* Liste öğelerinin madde işaretlerini kaldırma */
+	font-weight: 600; /* Liste yazıları kalın */
+	width: 80vw; /* Genişlik */
+	gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+	margin: 1vw 0.5vw 0.5vw 12.8vw; /* Diğer elementlerden uzaklığı */
+}
+
+.header .nav .ul .li { /* Liste öğelerine erişisin. */
+	flex-grow: 1;  /* Her liste öğesi, bir parça */ 
+	background-color: rgba(0,0,0,0.3); /* Liste öğelerinin arka plan rengi siyah verilirken %30 şeffaf */
+	transition: border-top-left-radius 1s ease, border-bottom-right-radius 1s ease, background-color 1s ease; /* Birtakım geçiş efektkleri */
+	padding: 0.4vw 0.2vw; /* İç boşluk */
+}
+
+.header .nav .ul .li:hover{ /* Header içerisinde bulunan navigasyondaki listenin öğelerinin üzerine fare ile gelindiğinde: */
+	border-top-right-radius: 1vw; /* Sağ üst köşe birazcık yuvarlak */
+	border-bottom-left-radius: 1vw; /* Sol alt köşe birazcık yuvarlak */
+	background-color: rgba(0,0,0,1); /* Arka plan rengi siyahın %100'ü*/
+}
+
+.header .nav .ul .li .a{ /* Liste maddelerindeki linklere erşişilsin */
+	text-decoration: none; /* Linklerin alt çizgisini kaldırma */
+	font-family: Verdana; /* Yazı tipi Verdana*/
+	color: white; /* Yazı rengi beyaz */
+	transition: color .5s ease; /* Renk geçişi oluşturma */
+	font-size: 1.6vw; /* Yazı boyutu */
+}
+
+.header .nav .ul .li .a:link{ /*  Linkin normal durumu */
+	color: white; /* Rengi beyaz */
+}
+
+.header .nav .ul .li .a:visited{ /* Ziyaret edilmiş linkin durumu */
+	color: white; /* Rengi beyaz*/
+}
+
+.header .nav .ul .li .a:hover{ /* Fareyle üzerine gelinen linkin durumu */
+	color: magenta; /* Rengi eflatun */
+}
+
+.header .nav .ul .li:hover .a{ /* Fare ile navigasyondaki liste öğesinin üzerine gelindiğinde: */
+	color: magenta; /* Rengi eflatun */
+}
+
+.header .nav .ul .li .a:active{ /* Fareyle linke tıklama anında linkin durumu */
+	color: red; /* Rengi kırmızı */
+}
+/* header sonu */
+
+/* main başlangıcı */
+.main{/* main'e erişme */
+	background-color: lightgray; /* Arka plan rengi */
+	grid-row: 2 / span 1; /* İkinci satırdan başlayarak 1 satırı birleştirerek main bölümü oluştur. */ 
+    grid-column: 1 / span 1; /* Birinci sütundan başlayarak 1 sütunu birleştirerek main bölümü oluştur. */ 
+	padding: 1vw; /* İç boşluk */
+	border-top-right-radius: 4vw; /* main'nin sağ üst köşesine oval */
+	height: 100%; /* Yükseklik */
+	transition: background-color .6s ease; /* main'nin arka plan rengi için eçiş efekti */
+}
+
+.main:hover{ /* Fare ile main üzerine gelindiğinde: */
+	background-color: darkgray; /* Arka plan rengi */
+}
+
+.genel_section{ /* Genel içerk bölümüne erişme */
+	position: relative; /* Göreceli konumlandırma */
+	display: flex; /* Esnek yapıda */
+	flex-direction: column; /* Yapısı sütun */
+    background-color: black; /* Arka plan rengi */
+	border-top-right-radius: 1.6vw; /* Sağ üst köşesi oval */
+	height:100%; /* Yükseklik */
+	padding: 0.7vw; /* İç boşluk */
+	border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+}
+
+.ozel_alt_section{ /* özel içerik bölümüne erişme */
+	display: flex; /* Esnek yapıda */
+	flex-direction: row; /* Satır olarak hizalama */
+	top: 0; /* Ebeveynin içerisinde yukarıya bitişik */
+	margin-bottom: 1vw; /* Diğer elementlere alttan uzaklık */
+}
+
+.ozel_alt_section .textarea{ /* Özel içerik bölümündeki yazı kutucuğuna erişme */
+	flex-direction: row; /* Satır olarak hizalama */
+	flex-grow: 1; /* Bir parçadan ibaret */
+	font-family: Verdana; /* Yazı tipi Verdana */
+	border: none; /* Çerçeveyi kaldırma */
+	outline: none; /* Dış hat çizgisini kaldırma */
+	resize: none; /* Boyutun değiştirilmesini engelleme */
+	width: 100%; /* Genişlik */
+	font-size: 1.2vw; /* Yazı boyutu*/
+	padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+	border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+	border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi */
+	background-color: rgba(255,255,255,0.8); /* Arka plan rengi */	
+}
+
+.ozel_alt_section .textarea:focus{ /* Yazı kutucuğuna tıklanmış olunduğunda: */
+	background-color: #fff; /* Arka plan rengi */
+}
+
+.ozel_alt_section .button{ /* Özel içerik bölümündeki butona erişme */
+	background-color: black; /* Arka plan rengi*/
+	color: white; /* Yazı rengi*/
+	font-family: Verdana; /* Yazı tipi */
+	cursor: pointer; /* Farenin üzerine gelinecek imleç türü */
+	border: 1px solid white; /* Çerçeve */
+	padding: 1vw 1vw 2vw 1vw; /* İç boşluk*/
+	border-radius: 0.7vw; /* Köşeler oval */
+	font-size:1.28vw; /* Yazı boyutu */
+	width: 8vw; /* Genişlik */
+	height: 3.8vw; /* Yükseklik  */
+	margin: 1vw 0 1.2vw 0.7vw;  /* Diğer elementlere uzaklık */
+	transition: background-color .3s ease; /* Arka plan rengi için bir geçiş efekti */
+}
+.ozel_alt_section .button:hover{ /* Butonun üzerine gelindiğinde: */
+	background-color: darkblue; /* Arka plan rengi */
+	color: white; /* Yazı rengi */
+}
+
+.ozel_alt_section .button:active{ /* Butona tıklandığında: */
+	background-color: green; /* Arka plan rengi */
+	color: white; /* Yazı rengi */
+}
+
+.alt_section{ /* Alt içerik bölümüne erişme */
+	flex-grow: 1; /* Bir parçadan ibaret */
+	background-color: gray; /* Arka plan rengi */
+	padding: 1vw; /* İç boşluk */
+	border-radius: 0.3vw; /* Köşeleri oval */
+	transition: background-color .6s ease; /* Arka plan rengi için geçiş efekti */
+}
+
+.alt_section .h3{ /* Alt içerik bölümündeki başlığa erişme */
+	text-align: center; /* Yatay hizalaması ortada */
+	font-family: Verdana; /* Yazı tipi*/
+	color: black; /* Yazı rengi */
+	margin: 0; /* Diğer elementlerden uzaklık */
+	padding: 0; /* İç boşluk */
+	transition: color .65s ease; /* Yazı rengi için geçiş efekti */
+	font-size: 1.7vw; /* Yazı boyutu */
+}
+
+.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+	color:black; /* Yazı rengi */
+	transition: color 1s ease; /* Yazı rengi için geçiş efekti */
+	margin: 0.4vw 0.4vw; /* Diğer elementlerden uzaklık */
+	padding: 0; /* İç boşluğu kaldıma */
+	text-align: justify; /* Yazılar, iki yana yaslı */
+	font-size: 1.3vw; /* Yazı boyutu */
+}
+
+.alt_section:hover{ /* Fareile alt içerik bölümünün üzerine gelindiğinde: */
+	background-color: lightgray; /* Arka plan rengi */
+}
+
+.alt_section:hover .h3, .alt_section:hover .p{ /* Alt içerik bölümünün üzerine fare ile gelindiğinde alt içerik başık ve paragrafı: */
+	color: black; /* Yazı rengi */
+}
+/* main sonu*/
+
+/* aside başlangıcı*/
+.aside {                                 /* Aside'ye erişme */
+	grid-row: 2 / span 1;             /* İkinci satırdan başlayarak 1 satırdan ibaret */
+	grid-column: 2 / span 1;        /* İkinci sütundan başlayarak 1 sütundan ibaret */
+	background-color: darkblue;  /*  Arka plan rengi */
+	position: fixed;                     /* Sabit konumlandırma */
+    right: 0;                              /* Sağa ve */
+	top:0;                                 /* yukarıya sabitleme */
+	z-index: 1;                          /* Öne Çıkartma */
+	height: 100%;                      /* Yükseklik */
+	width: 18vw;                        /* Genişlik*/
+	margin-top: 8.8vw;                /* Yukarıdan uzaklık */
+}
+
+.aside .h3{                             /* Aside'deki başlığa erişme */
+	text-align: center;                 /* Metin hizalaması ortada */
+	font-family: Verdana;            /* Yazı tipi */
+	color: white;                        /* Yazı rengi */
+	margin: 0;                           /* Diğer elementlerden uzaklık */
+	padding: 0;                          /* İç boşluğu kaldırma */
+    font-size: 1.8vw;                  /* Yazı boyutu */
+}
+
+.aside .ul{ /* Aside'deki listeye erişme */
+	display: flex; /* Liste, esnek yapıda */
+	flex-direction: column; /* Liste öğeleri, sütun halinde */
+	flex-wrap: nowrap; /* Liste öğeleri listeye sığmazsa alta veya üste çıkmasın. */
+	align-items: center; /* Dikey hizalaması ortada */
+	list-style-type: none; /* Liste öğelerinin madde işaretlerini kaldırma */
+	font-weight: 600; /* Yazılar kalın */
+	gap: 0.7vw; /* Liste öğerinin arasına boşluk */
+	padding: 0.5vw; /* İç boşluk */
+	margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+}
+
+.aside .ul .li{ /* Aside'deki listenin öğlerine erişme */
+	flex-grow: 1; /* Liste öğeleri 1 parçadan ibaret */
+	text-align: center; /* Liste öğeleri, hizalaması ortada */
+	background-color: lightgray; /* Arka plan rengi */
+	transition: background-color 1s ease, color 1s ease, border-radius 1s ease; /* Arka plan rengi, yazı rengi ve köşe ovalliği için geçiş efekti */
+	border: 3px solid rbga(0,0,0,0.1); /* Çerçeve */
+	width: 100%; /* Genişlik */
+	border-radius: 4px; /* Köşeler oval */
+	padding: 0.6vw; /* İç boşluk */
+}
+
+.aside .ul .li:hover{ /* Aside'deki listenin öğelerinin üzerine fare ile gelindiğinde: */
+	background-color: black; /* Arka plan rengi */
+	border-radius: 3vw; /* Köşeler oval */
+}
+
+.aside .ul .li .a{ /* Aside'deki listenin öğelerinin içindeki linklere erişme */ 
+	text-decoration: none; /* Listenin öğelerinin madde imlecini kaldırma */
+	cursor: pointer; /* linklerin üzerine gelindiğinde fare imleci, tıklama işareti */
+	font-weight: 600; /* Yazı kalınlığı */
+	color: black; /* Yazı rengi */
+	transition: color .5s ease; /* Link rengi için geçiş efekti */
+    font-size: 1.5vw; /* Yazı boyutu */
+}
+
+.aside .ul .li .a:link{ /* Aside'deki linkin normal durumu */
+	color: black; /* Yazı rengi */
+}
+
+.aside .ul .li .a:visited{ /* Ziyaret edilmiş linkin durumu */
+	color: black; /* Yazı rengi*/
+}
+
+.aside .ul .li .a:hover{ /* Fareyle üzerine gelinen linkin durumu */
+	color: white; /* Yazı rengi*/
+}
+
+.aside .ul .li:hover .a{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde linkler: */
+	color: magenta; /* Yazı rengi*/
+}
+
+.aside .ul .li .a:active{ /* Fareyle üzerine tıklanılan linkin durumu */
+	color: red; /* Yazı rengi*/
+}
+/* aside sonu */
+
+/* footer başlangıcı */
+.footer { /* Footer'a erişme */
+    grid-row: 3 / span 1; /* Üçüncü satırdan başlayıp 1 satırdan ibaret */
+    grid-column: 1 / span 3; /* Birinci sütundan başlayıp 3 sütunu birleştirme */
+    background-color: rgba(0,0,0,0.4); /* Arka plan rengi siyah ama %40 şeffaf */
+    padding: 10px; /* İç boşluk */
+    text-align: center; /* Yatay hizalaması ortada */
+    position: sticky; /* Yapışkan konumlandırma */
+    bottom: 0; /* Konumlandığı yer ebeveyninin (body)alt kısmıdır */
+	border-radius: 45px; /* Köşeler oval */
+	z-index:2; /* Derinlik ekseninde önde */
+}
+
+.footer:hover{ /* Fare ile footer'ın üzerine gelindiğinde: */
+    background-color: rgba(0,0,0,0.8);  /* Arka plan rengi siyah ama %80 şeffaf */
+	color: rgba(255,255,255,1);  /* Yazı rengi */
+}
+
+.footer .h6{ /* Footer'daki başlığa erişme */
+	margin:0; /* Diğer elementlerden uzaklığını kaldırma */
+	color: rgba(255,255,255,0.7);  /* Footer'daki başlık rengi beyaz ama %70 şeffaf */
+	font-family: Verdana; /* Yazı tipi  */
+}
+/* footer sonu*/
+
+
+/*  medya sorguları başlangıcı */
+@media (max-width: 240px)and (min-width:0){
+.ball { /* Logo dairesine erişme */
+        width: 19vw; /* Genişlik */
+        height: 19vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 3.6vw; /* Yazı boyutu */
+		letter-spacing: 49px; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 4.1vw; /* Yazı boyutu */
+		margin: 1vw 0 0 17vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 2.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 1.5vw 19vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	.body .header .nav .ul .li{ /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		padding: 1vw 0.7vw 2vw 0.7vw;
+		border-radius: 3.5px;
+    }
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2.5vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 20vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.36vw;                  /* Yazı boyutu */
+		display: none;
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 1.8vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0 0.6vw 1.4vw 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2.9vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1.3vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 12.5vw; /* Yükseklik */
+		font-size: 3.6vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 8.7vw 4.2vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:2.5vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 3vw 0.2vw 1.5vw 1vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:4vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 3.75vw; /* Yazı boyutu */
+	}
+	
+	.footer{
+		display: none;
+	}
+}
+
+@media (max-width: 400px)and (min-width:241px){
+.ball { /* Logo dairesine erişme */
+        width: 16.7vw; /* Genişlik */
+        height: 16.7vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 3.5vw; /* Yazı boyutu */
+		letter-spacing: 21vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 4vw; /* Yazı boyutu */
+		margin: 1vw 0 0 17vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 2.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 1.5vw 19vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	.body .header .nav .ul .li{ /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		padding: 1vw 0.7vw 2vw 0.7vw;
+		border-radius: 3.5px;
+    }
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2.5vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 17vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.36vw;                  /* Yazı boyutu */
+		display: none;
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 1.5vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0 0.6vw 1vw 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2.9vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1.3vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 10.5vw; /* Yükseklik */
+		font-size: 3vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 8.7vw 4.2vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:2.4vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 2.5vw 0.2vw 1.5vw 1vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:3.5vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 3.2vw; /* Yazı boyutu */
+	}
+	
+	.footer{
+		display: none;
+	}
+}
+
+@media (max-width: 500px) and  (min-width: 401px){
+	.ball { /* Logo dairesine erişme */
+        width: 11.4vw; /* Genişlik */
+        height: 11.4vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 2.3vw; /* Yazı boyutu */
+		letter-spacing: 16vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.5vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 1vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	.body .header .nav .ul .li{ /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		padding-bottom: 0.4vw;
+    }
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2.5vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 12.5vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.25vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 1.23vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw 0.6vw 1vw 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2.65vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1.3vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 9.3vw; /* Yükseklik */
+		font-size: 2.8vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 8.7vw 4.2vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:2.4vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 2vw 0.2vw 1.5vw 1vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:2.85vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 2.8vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 600px) and  (min-width:501px){
+	.ball { /* Logo dairesine erişme */
+        width: 10.1vw; /* Genişlik */
+        height: 10.1vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 2.1vw; /* Yazı boyutu */
+		letter-spacing: 14.2vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.5vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2.4vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 10.9vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.35vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 1.23vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2.5vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1.2vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 9vw; /* Yükseklik */
+		font-size: 2.4vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 1vw 3.3vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.8vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 2.3vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:2.8vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 2.6vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 700px) and  (min-width: 601px){
+	.ball { /* Logo dairesine erişme */
+        width: 9.69vw; /* Genişlik */
+        height: 9.69vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.9vw; /* Yazı boyutu */
+		letter-spacing: 14.1vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.3vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2.25vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 10.2vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.35vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 1.2vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2.4vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1.2vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 7.5vw; /* Yükseklik */
+		font-size: 2.3vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 1vw 3.3vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.8vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1.5vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:2.6vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 2.4vw; /* Yazı boyutu */
+	}	
+}
+
+@media (max-width: 800px) and  (min-width: 701px){
+	.ball { /* Logo dairesine erişme */
+        width: 9.4vw; /* Genişlik */
+        height: 9.4vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.8vw; /* Yazı boyutu */
+		letter-spacing: 14vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.25vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2.2vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 10vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.3vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.9vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2.15vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6.8vw; /* Yükseklik */
+		font-size: 2vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 0.7vw 2.9vw 0.7vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.7vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1.4vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:2.25vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 2.25vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 900px) and (min-width: 801px) {
+	.ball { /* Logo dairesine erişme */
+        width: 9.1vw; /* Genişlik */
+        height: 9.1vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.8vw; /* Yazı boyutu */
+		letter-spacing: -60px; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.2vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 2vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 9.4vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.22vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.8vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 2vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 0.8vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6.35vw; /* Yükseklik */
+		font-size: 1.75vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 0.5vw 2.84vw 0.5vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.5vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:2vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 2vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+	.ball { /* Logo dairesine erişme */
+        width: 8.9vw; /* Genişlik */
+        height: 8.9vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.55vw; /* Yazı boyutu */
+		letter-spacing: 13.65vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.2vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 1.85vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 8.9vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2.15vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.7vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 1.85vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6vw; /* Yükseklik */
+		font-size: 1.67vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 0.5vw 2.84vw 0.5vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.5vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:1.84vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 1.84vw; /* Yazı boyutu */
+	}	
+}
+
+@media (max-width: 1200px) and (min-width: 1101px) {
+.ball { /* Logo dairesine erişme */
+        width: 8.8vw; /* Genişlik */
+        height: 8.8vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.5vw; /* Yazı boyutu */
+		letter-spacing: 13.5vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.2vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 1.8vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 8.8vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 2vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.7vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 1.65vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6vw; /* Yükseklik */
+		font-size: 1.57vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 0.5vw 2.7vw 0.5vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.4vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:1.77vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 1.65vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 1300px) and (min-width: 1201px) {
+.ball { /* Logo dairesine erişme */
+        width: 8.6vw; /* Genişlik */
+        height: 8.6vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.5vw; /* Yazı boyutu */
+		letter-spacing: 13.2vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.2vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 1.7vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 8.8vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 1.83vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.7vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 1.55vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6vw; /* Yükseklik */
+		font-size: 1.4vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 0.5vw 2vw 0.5vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.35vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:1.75vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 1.55vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 1400px) and (min-width: 1301px) { /* Kullanıcı ekran ölçüleri 1301px ile 1400px arasında iken bu stiller uygulanır: */
+    .ball { /* Logo dairesine erişme */
+        width: 8.6vw; /* Genişlik */
+        height: 8.6vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.5vw; /* Yazı boyutu */
+		letter-spacing: 13.3vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.2vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 1.6vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 8.8vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 1.8vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.7vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 1.5vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6vw; /* Yükseklik */
+		font-size: 1.3vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 1vw 2vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.35vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1.2vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:1.7vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 1.5vw; /* Yazı boyutu */
+	}
+}
+
+@media (max-width: 1500px) and (min-width: 1400px) { /* Kullanıcı ekran ölçüleri 1301px ile 1400px arasında iken bu stiller uygulanır: */
+    .ball { /* Logo dairesine erişme */
+        width: 8.6vw; /* Genişlik */
+        height: 8.6vw; /* Yükseklik */
+    }
+	
+    .text { /* Logo yazısına erişme */
+        font-size: 1.4vw; /* Yazı boyutu */
+		letter-spacing: 13.3vw; /* harfler arası boşluk*/
+    }
+	
+    .body .header .h1 { /* Header'daki sayfa başlığına erişme */
+        font-size: 3.2vw; /* Yazı boyutu */
+		margin: 0.5vw 0 0 6.5vw; /* Diğer elementlere yukarıdan ve soldan uzaklık */
+    }
+	
+	.body .header .nav .ul{ /* Header'daki navigasyon içinde bulunan listeye erişme */
+		gap: 7.5vw; /* Liste öğeleri arasında boşluk */
+		width: 80vw; /* Genişlik */
+		margin: 1vw 0.5vw 0.5vw 12.8vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+    .body .header .nav .ul .li .a { /* Header içindeki navigasyondaki listenin içinde bulunan linklere erişme */
+		font-size: 1.6vw; /* Yazı boyutu */
+    }
+	
+    .aside {                                 /* Aside'ye erişme */
+		width: 18vw;                         /* Genişlik */
+		margin-top: 8.8vw;                  /* Yukarıdan uzaklığı */
+    }
+	
+	.aside .h3 {
+        font-size: 1.8vw;                  /* Yazı boyutu */
+    }
+	
+	.aside .ul{ /* Aside'deki listeye erişme */
+		gap: 0.7vw; /* Liste öğeerinin arasına boşluk  */
+		padding: 0.5vw; /* İç boşluk */
+		margin: 0.4vw; /* Listenin diğer elementlerden uzaklığı */
+	}
+	
+	.aside .ul .li{ /* Aside'deki listenin öğelerine erişme */
+		border-radius: 4px; /* Köşeler oval*/
+		padding: 0.6vw; /* İç boşluk */
+	}
+	
+	.aside .ul .li:hover{ /* Aside'deki liste öğelerinin üzerine fare ile gelindiğinde: */
+		border-radius: 3vw; /* Köşelerin ovalliğini arttırma */
+	}
+	
+	.aside .ul .li .a { /* Aside'deki liste öğelerinin içind bulunan linklere erişme */
+        font-size: 1.5vw; /* Yazı boyutu */
+    }
+	
+	.genel_section{ /* Genel içerik bölümüne erişme */ 
+		padding: 0.7vw; /* İç boşluk */
+		border-top-right-radius: 3vw; /* Sağ üst köşesi oval */
+	}
+	
+	.ozel_alt_section{ /* Özel alt içerik bölümüne erişme */
+		margin-bottom: 1vw; /* Aşağıdan uzaklık */
+	}
+	
+	.ozel_alt_section .textarea{ /* Özel alt içerik bölümündeki yazı kutucuğuna erişme */
+		height: 6vw; /* Yükseklik */
+		font-size: 1.5vw; /* Yazı boyutu */
+		padding: 0.5vw 0 0 0.8vw; /* İç boşluk */
+		border-top-right-radius: 0.6vw; /* Sağ üst köşesi oval */
+		border-bottom-right-radius: 0.6vw; /* Sağ alt köşesi oval */
+	}
+	
+	.ozel_alt_section .button{	/* Özel alt içerik bölümündeki butona erişme */
+		padding: 1vw 1vw 2vw 1vw; /* İç boşluk */
+		border-radius: 0.7vw; /* Köşeler oval */
+		font-size:1.35vw; /* Yazı boyutu */
+		width: 8vw; /* Genişlik */
+		height: 3.8vw; /* Yükseklik */
+		margin: 1vw 0 1.2vw 0.7vw; /* Diğer elementlerden uzaklık */
+	}
+	
+	.alt_section{ /* Alt içerik bölümüne erişme */
+		padding: 1vw; /* İç boşluk */
+		border-radius: 0.3vw; /* Köşeler oval */
+	}
+	
+	.alt_section .h3{ /* Alt içeri bölümü başlığına erişme */
+		font-size:1.7vw; /* Yazı boyutu */
+	}
+	
+	.alt_section .p{ /* Alt içerik bölümündeki paragrafa erişme */
+		font-size: 1.5vw; /* Yazı boyutu */
+	}
+}
+/*  medya sorguları *sonu */
+
+
+
+
+
+
+
+
+
+
+
+
